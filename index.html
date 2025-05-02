@@ -1,0 +1,143 @@
+# JavaScript 기초
+
+- 반드시 스스로 개념을 정리하셔야 합니다.
+- 타인에게 특히, 초등학생에게 설명할 정도로 쉽게 개념을 정리하시면 좋습니다.
+
+## 1. 기초 상식
+
+- HTML5 : 웹브라우저에 데이터를 보여주는 형식을 지정한 문법구조
+- CSS3 : 데이터를 잘보여주기 위해서 꾸며주는 용도의 문법
+- JS
+
+```
+1. css 제어 : 레이아웃 변경 하도록 지시
+2. html 제어 : 데이터의 결과를 CRUD 하도록 지시
+3. Server, DB, 데스크탑 Application 을 제어 : Node.js 로 가능함.
+```
+
+## 2. JS 의 종류는 2가지
+
+### 2.1. 웹브라우저용 JS (Web API)
+
+- Web API 는 웹브라우저에 미리 기능이 만들어져 있는 JS 기능
+- 주로 직접 코딩하는 것이 아니고 미리 만들어진 기능을 사용하는 것을 학습하면 됨.
+
+### 2.2. 데이터 관리 JS (ES6)
+
+- 이전에 JS 는 웹브라우저 마다 모두 달랐다.
+- 이에 대한 불편함을 해소하기 위해서 JS 의 문법을 통일하였다.
+- 기준이 ECMAScript 라고하며 ES6 가 가장 기준이 된다.
+
+## 3. 실습
+
+### 3.1. 웹브라우저에서 JS 실행하기
+
+- `F12` 실행 > `Console 탭`을 선택 : console 탭은 js 의 `결과, 오류`를 보는 곳
+
+```js
+console.log("안녕");
+```
+
+```js
+console.clear();
+```
+
+```js
+alert("안녕");
+```
+
+- 1 줄 이상 작성하는 경우는 `Shift + Enter` 키를 입력하여야 함.
+
+```js
+console.log("안녕하세요.");
+console.log("좋은 금요일입니다");
+```
+
+### 3.2. html에서 JS 실행하기
+
+- index.html 파일을 생성합니다.
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트</title>
+  </head>
+  <body></body>
+</html>
+```
+
+## 4. `JS 작성 위치` 고민하기
+
+- `<script></script>` 태그를 지원합니다.
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트</title>
+    <script>
+      console.log("1. 안녕");
+    </script>
+  </head>
+  <body>
+    <script>
+      console.log("2. body 입니다");
+    </script>
+  </body>
+</html>
+
+<script>
+  console.log("3. html 끝 입니다");
+</script>
+```
+
+### 4.1. 3번자리 즉 html 의 끝이 좋다.
+
+- 일반적으로 css 와 html 을 제어하는 것이 js 의 목적이다.
+- `웹브라우저가 css 와 html 을 모두 읽고 난 후의 자리`
+
+### 4.2. 1번자리 즉 head 자리는 `기능`의 정의
+
+- 내가 즉, 개발자가 만든 많은 `기능들`을 코딩하기 좋은 자리
+- 다른 개발자가 만든 많은 `기능들`을 불러와서 사용하기 좋은 자리
+
+## 5. js 도 외부에 파일로 만들어서 관리하자.
+
+- js 폴더 생성
+- js 폴더에 `lib.js` 파일 생성
+- `js/lib.js 내용`
+
+```js
+// 커피를 출력하는 기능
+function 커피머쉰(_msg) {
+  console.log(_msg);
+}
+console.log("1. 안녕");
+```
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트</title>
+    <script src="js/lib.js"></script>
+  </head>
+  <body>
+    <script>
+      console.log("2. body 입니다");
+    </script>
+  </body>
+</html>
+
+<script>
+  console.log("3. html 끝 입니다");
+  커피머쉰("아이스아메리카노");
+</script>
+```
