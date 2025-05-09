@@ -669,45 +669,45 @@ const resultD = `${numA} / ${numB} = ${numA / numB}`;
 ```js
 const a = 1; // number
 const b = "1"; // string
-// 1단계 number ===> string으로 물어보지 않고 변환(암묵적 데이터 타입 변환)
-// number + string ====> string
+// 1단계 number ===> string 으로 물어보지 않고 변환(암묵적 데이터 타입 변환)
+// string + string ====> string
 const result = a + b;
 ```
 
--`-연산자`
+- `- 연산자`
 
 ```js
 const numA = 100;
 const numB = 10;
-const result = numA - numB; //90
+const result = numA - numB; // 90
 ```
 
 ```js
-const numA="100"; //string
-const numB = 10; //number
-// string을 number로 암묵적 변환
-// numer- number
-const result numA - numB //90
+const numA = "100"; // string
+const numB = 10; // number
+// string 을 number 로 암묵적 변환
+// number - number
+const result = numA - numB; // 90
 ```
 
 ```js
-const numA="ABC"; //string
-const numB = 10; //number
-// string을 number로 암묵적 변환
-// numer- number
-const result numA - numB //NaN (Not or Number)
+const numA = "ABC"; // string
+const numB = 10; // number
+// string 을 number 로 암묵적 변환 실패
+// string - number
+const result = numA - numB; // NaN  ( Not a Number )
 ```
 
--`* / 연산자`
+- `*  /  연산자`
 
 ```js
 const numA = 4;
 const numB = 2;
-const resultMulti = numA * numB; //8
-const resultDevide = numA / numB; //2
+const resultMulti = numA * numB; // 8
+const resultDevide = numA / numB; // 2
 ```
 
-### 2.2 나머지 연산(` %`)
+### 2.2. 나머지 연산 (`%`)
 
 - 총 게시글 52개
 - 한 페이지당 5개 목록
@@ -717,9 +717,9 @@ const resultDevide = numA / numB; //2
 ```js
 const total = 52;
 const count = 5;
-const totalPage = total / count; //소숫점 나옴
-const totalPageNumber = Math.ceil(totalPage); //올림
-const lastCount = total % count; //나머지 나옴
+const totalPage = total / count; // 소숫점 나옴
+const totalPageNumber = Math.ceil(totalPage); // 올림
+const lastCount = total % count; // 나머지 나옴
 ```
 
 ### 2.3. 복합연산자 (연산 타이핑 수를 줄인다.)
@@ -742,11 +742,13 @@ result *= 4; // 52
 // result = result / 2;
 result /= 2; // 26
 
-// result = result % 2;
+// result = result % 2;  % 는 나머지 연산자, 모듈러 연산자
 result %= 2; // 0
 ```
 
-### 2.4. 증감연산자 (++ --)
+### 2.4. 증감연산자 ( ++ -- )
+
+- 개발자는 타이핑 수를 줄이려고 노력합니다.
 
 ```js
 let num = 5;
@@ -764,21 +766,26 @@ num--;
 --num;
 ```
 
+- 몰랐으며...
+
 ```js
 let num = 20;
-//후에 배치된 후치연산 이라서
-let numA = num--; //
+// 후에 배치된 후치연산 이라서
+let numA = num--; // numA 에는 20입니다. 그리고 연산
+num; // 19
 ```
 
 ```js
 let num = 20;
-//전에 배치된 전치연산 이라서
-let numA = --num; //
+// 전에 배치된 전치연산 이라서
+let numA = --num; // numA 에는 19입니다. 그리고 연산
+num; // 19
 ```
 
 ### 2.5. 논리연산자
 
-- `falsy` 한 값의 종류 (js에서 false 라고 판단하는 값)
+- `무조건 이해`하셔야 합니다.
+- `falsy` 한 값의 종류 (js 에서 false 라고 판단하는 값)
 
 ```js
 "";
@@ -789,11 +796,11 @@ NaN;
 false;
 ```
 
--최종 결과가 true 인지 false인지 결과를 변수에 저장
+- 최종 결과가 true 인지 false 인지 결과를 변수에 저장
 
-#### 2.5.1. OR 연산자
+#### 2.5.1. OR 연산자 (또는)
 
--2개중 1개만 true 이면 true, 나머지 false
+- 2개 중 1개만 true 이면 true, 나머지 false
 
 ```js
 let result = true || true;
@@ -802,13 +809,13 @@ result = false || true;
 result = "" || true;
 
 let userPass;
-result = userPass || "비밀번호를 입력하시오.";
+result = userPass || "비밀번호 넣으세요.";
 ```
 
 #### 2.5.2. AND 연산자 (그리고)
 
 - 둘다 true 면 true, 아니면 false
-- 변수에 결과값은 true, false가 담겨진다.
+- 변수에 결과값은 true, false 가 담겨진다.
 
 ```js
 let result = true && true;
@@ -816,24 +823,24 @@ result = false && true;
 result = false && false;
 ```
 
-### 2.5.3. Not 연산자 (반대)
+#### 2.5.3. Not 연산자 (반대)
 
 ```js
 let result = !true;
 result = !false;
 ```
 
-### 2.5.4. 실습 예제
+#### 2.5.4. 실습 예제
 
 ```js
-const nickName = "";
+let nickName = "";
 let displayName = nickName || "Guest";
-console.log(displayName); //
+console.log(displayName); // Guest
 ```
 
 ```js
 let title = null;
-let result = title || "제목없음";
+let result = title || "제목 없음";
 console.log(result);
 ```
 
@@ -857,17 +864,17 @@ console.log(result);
 
 ```js
 let config = {};
-config.thema = config.thema || "dark";
-console.log(config); //{thema:"light"}
+config.theme = config.theme || "light";
+console.log(config); // { theme: "light" }
 ```
 
 ```js
-let option = {
+let options = {
   lang: null,
   fontSize: 0,
 };
-let lang = option.lang || "ko";
-let fontsize = option.fontSize || 20;
+let lang = options.lang || "ko";
+let fontSize = options.fontSize || 20;
 ```
 
 ### 2.6. 비교연산자
@@ -875,11 +882,11 @@ let fontsize = option.fontSize || 20;
 - 정말 중요합니다.
 
 ```js
-//데이터 값의 종류는 비교하지 않음
-let resultA = "1" == 1; //true
+// 데이터 값의 종류는 비교하지 않음
+let resultA = "1" == 1; // true
 
-// 데이터 값과 데이터 종류도 비교함
-let resultB = "1" === 1; //false
+// 데이터 값과 데이터 종류도 비교함.
+let resultB = "1" === 1; // false
 
 let resultC = 1 > 2;
 let resultD = 1 < 2;
@@ -891,16 +898,10 @@ let resultH = 1 !== 2;
 
 ### 2.7. 병합연산자
 
-- 내가 FE라면 반드시 알아야 함.
+- 내가 FE 라면 반드시 알아야 함.
 - 일반적으로 기본값 셋팅에서 활용
-- falsy가 아니라 `null, undefined` 일 때만 값을 비교할 경우
-- 아래에서 기대한 코드는 0값이 나오길 기대하고 코드 진행함.
-
-```js
-let userPoint = undefined;
-let displayPoint = userPoint || 500000;
-console.log(displayPoint);
-```
+- falsy 가 아니라 `null, undefined` 일 때만 값을 비교할 경우
+- 아래에서 기대한 코드는 `0` 값이 나오길 기대하고 코드 진행함.
 
 ```js
 let userPoint = 0;
@@ -908,12 +909,12 @@ let displayPoint = userPoint || 500000;
 console.log(displayPoint);
 ```
 
-- `??` 연산자는 null과 undefined만 비교한다.
-- 나머지는 `||`과 같다.
+- `??` 연산자는 null 과 undefined 만 비교한다.
+- 나머지는 `||` 과 같다.
 
 ```js
 let userPoint = 0;
-let displayPoint = userPoint || 500000;
+let displayPoint = userPoint ?? 500000;
 console.log(displayPoint);
 ```
 
@@ -923,9 +924,9 @@ let formInput = {
   email: null,
   phone: undefined,
 };
-const name = formInput.name ?? "이름없음";
-const email = formInput.email ?? "이메일없음";
-const phone = formInput.phone ?? "전화없음";
+const name = formInput.name ?? "이름 없음";
+const email = formInput.email ?? "이메일 없음";
+const phone = formInput.phone ?? "전화 없음";
 ```
 
 ### 2.8. 옵셔널체이닝(`?.`)
@@ -943,13 +944,13 @@ const age = user.profile?.age ?? "정보가 없어서 나이정보를 몰라요"
 
 ### 2.9. 3항 연산자
 
-- 연산자가 3개라서 3항 연산자라고 합니다
-- `결과= 조건식 ? 참일때 결과: 거짓일때 결과`
+- 연산자가 3개라서 3항 연산자라고 합니다.
+- `결과 = 조건식 ? 참일때 결과 : 거짓일때 결과;`
 - 활용 빈도가 너무 높습니다.
 
 ```js
-const userRole = "ADMIN"; //사용자 등급
-//const url = 조건 ? 참 : 거짓;
+const userRole = "ADMIN"; // 사용자 등급
+// const url = 조건 ? 참 : 거짓;
 const url = userRole === "ADMIN" ? "admin.html" : "guest.html";
 ```
 
@@ -959,8 +960,8 @@ const result = age < 19 ? "동의서 필요" : "성인 인증";
 ```
 
 ```js
-const goodCount =10;
-const result = goodCount > 0 ? "재고가 있어요":"재고가 없어요"';
+const goodCount = 10;
+const result = goodCount > 0 ? "재고가 있어요" : "재고가 없어요";
 ```
 
 ```js
@@ -968,10 +969,375 @@ const user = {
   isLogin: true,
   name: "아이유",
 };
-const result = user.islogin ? `${user.name}님 반가워요.` : "로그인 해주세요.";
+const result = user.isLogin ? `${user.name}님 반가워요.` : "로그인 해 주세요.";
 ```
 
 ```js
 let num = 5;
 let result = num % 2 === 0 ? "짝수" : "홀수";
 ```
+
+## 3. 조건문(Condition)
+
+### 3.1. if 문
+
+- `참/거짓`을 판단하여 코드 분기 실행함.
+- 모양 1.
+
+```js
+if(조건) {
+
+  조건이 참이면 실행;
+
+}
+```
+
+- 모양 2.
+
+```js
+if(조건) {
+
+  조건이 참이면 실행;
+
+}else{
+
+  조건이 거짓이면 실행;
+
+}
+```
+
+- 모양 3.
+
+```js
+if(조건1) {
+
+  조건1 이 참이면 실행;
+
+}else if(조건2){
+
+   조건2 이 참이면 실행;
+
+}else if(조건3){
+
+   조건3 이 참이면 실행;
+
+}else{
+
+  모든 조건에 거짓이면 실행;
+
+}
+```
+
+- 예제) 로그인이 된 경우에 메세지 출력하기
+
+```js
+const isLogin = true;
+if (isLogin === true) {
+  console.log("로그인하셨네요. 반갑습니다.");
+}
+
+if (isLogin) {
+  console.log("로그인하셨네요. 반갑습니다.");
+}
+// 아래처럼 하시면 힘들어요. 코드 가독성 떨어져요.
+if (isLogin) console.log("로그인하셨네요. 반갑습니다.");
+```
+
+- 예제) 로그인 된 경우의 메시지와 로그인 안된 경우의 메시지 출력하기.
+
+```js
+const isLogin = true;
+if (isLogin) {
+  console.log("어서오세요.");
+} else {
+  console.log("로그인 하셔야 합니다.");
+}
+```
+
+- 예제) 나이에 따라서 다른 메시지 출력하기 (조건이 2개이상인 경우)
+
+```js
+const age = 100;
+if (age >= 60) {
+  console.log("어르신 이시네요.");
+} else if (age >= 50) {
+  console.log("50대 이시네요.");
+} else if (age >= 40) {
+  console.log("40대 이시네요.");
+} else if (age >= 30) {
+  console.log("30대 이시네요.");
+} else if (age >= 20) {
+  console.log("청년 이시네요.");
+} else {
+  console.log("미성년 이시네요.");
+}
+```
+
+- 예) 사용자가 입력한 항목이 값이 `없을 경우` 메시지 보내기 (필수 입력 사항)
+
+```js
+const name = "";
+const pass = "1234";
+const useInfoCheck = false; // 사용자 정보 활용 동의
+const useEmailCheck = false; // 이메일 수신 동의
+
+if (name === "") {
+  alert("이름을 입력하세요.");
+  return;
+}
+
+if (!name) {
+  alert("이름을 입력하세요.");
+  return;
+}
+
+if (pass === "") {
+  alert("비밀번호 입력하세요.");
+  return;
+}
+if (!pass) {
+  alert("비밀번호 입력하세요.");
+  return;
+}
+
+if (useInfoCheck === false) {
+  alert("개인정보 동의를 체크하세요.");
+  return;
+}
+if (!useInfoCheck) {
+  alert("개인정보 동의를 체크하세요.");
+  return;
+}
+if (useEmailCheck === false) {
+  alert("이메일 수신 동의를 체크해주세요.");
+  return;
+}
+if (!useEmailCheck) {
+  alert("이메일 수신 동의를 체크해주세요.");
+  return;
+}
+
+console.log("저희 서비스를 자유롭게 활용하세요.");
+```
+
+### 3.2. switch 문
+
+- `여러 개의 값` 중 하나의 `값`이 같은지 판단 후 실행 (값을 비교)
+
+```js
+switch (값) {
+  case 비교값1:
+                실행 코드
+    break;
+  case 비교값2:
+                실행 코드
+    break;
+  case 비교값3:
+                실행 코드
+    break;
+  default:
+              실행 코드
+    break;
+}
+```
+
+- 예) 엘리베이터 층 예제
+
+```js
+const layer = 5; // 값
+
+switch (layer) {
+  case 1:
+    console.log("1층 내리세요.");
+    break;
+  case 2:
+    console.log("2층 내리세요.");
+    break;
+  case 3:
+    console.log("3층 내리세요.");
+    break;
+  case 4:
+    console.log("4층 내리세요.");
+    break;
+  case 5:
+    console.log("5층 내리세요.");
+    break;
+  default:
+    console.log("당신은 내릴 층이 없습니다.");
+    break;
+}
+```
+
+- if 와 switch 종합 예제
+
+```js
+const userRole = "ADMIN";
+
+if (userRole === "MEMBER") {
+  console.log("회원");
+} else if (userRole === "ADMIN") {
+  console.log("관리자");
+} else {
+  console.log("비회원");
+}
+
+switch (userRole) {
+  case "MEMBER":
+    console.log("회원");
+    break;
+  case "ADMIN":
+    console.log("관리자");
+    break;
+  default:
+    console.log("비회원");
+    break;
+}
+```
+
+## 4. 반복문(Loop)
+
+- 동일한 실행을 반복하는 문법.
+
+### 4.1. for 구문
+
+- 주어진 `횟수만큼` 반복 실행 (`개발자가 반복횟수를 아는 경우`)
+
+```js
+for(초기값은 단 한번만 실행 ; 조건식의 결과가 true/false ; 증감식은 조건식을 false 로 만들기 위한 것) {
+     할일 코드 작성
+}
+```
+
+```js
+const total = 10; // 총 반복횟수
+for (let i = 0; i < total; i++) {
+  console.log(`현재 ${i} 입니다.`);
+}
+```
+
+- 예제) 총 합계 값 알아내기
+
+```js
+// 장바구니 담긴 제품 가격 모음.
+const bucketsArr = [1000, 500, 700, 400];
+// 반복 횟수
+const total = bucketsArr.length;
+// 반복문 없다면
+let totalPrice = bucketsArr[0] + bucketsArr[1] + bucketsArr[2] + bucketsArr[3];
+
+// 반복문을 활용한다면
+let totalPriceFor = 0;
+for (let i = 0; i < total; i++) {
+  totalPriceFor = totalPriceFor + bucketsArr[i];
+  // totalPriceFor += bucketsArr[i];
+}
+```
+
+- 예) 제품의 이름과 가격 및 재고를 html 태그로 출력하는 예제
+- 예) 백엔드에서 제품의 목록은 json 으로 주어진다.
+
+```js
+// 백엔드에서 가져온 자료 json
+const goodData = [
+  { id: 542, name: "사과", price: 1000, stock: 10 },
+  { id: 5557, name: "딸기", price: 200, stock: 0 },
+  { id: 2147, name: "키위", price: 5000, stock: 5000 },
+];
+// 반복횟수
+const total = goodData.length;
+for (let i = 0; i < total; i++) {
+  // 제품 1개를 뽑아서 보관한다.
+  const good = goodData[i];
+  // html 만들기
+  const tag = `<div id="${good.id}" class="good-box">
+      <p>제품명 : ${good.name}</p>
+      <p>가격 : ${good.price}</p>
+      <p>재고수량 : ${good.stock || "재고가 없어요"}</p>
+    </div>`;
+}
+```
+
+- 예) 구구단
+- 가까운 for 문에서 `break` 는 반복문 빠져나오고 종료됨.
+- 가까운 for 문에서 `continue` 는 반복문 실행 건너뛰고 계속 실행.
+
+```js
+const total = 9;
+for (let i = 1; i <= total; i++) {
+  if (i % 3 === 0) {
+    // 건너띄기
+    continue;
+  }
+  if (i === 6) {
+    // 종료하기
+    break;
+  }
+
+  console.log(i + " 단");
+
+  for (let j = 1; j <= total; j++) {
+    if (j === 6) {
+      break;
+    }
+    console.log(`${i} * ${j} = ${i * j}`);
+  }
+}
+```
+
+### 4.2. for in 구문
+
+- for 문으로 모두 가능하다.
+- for를 `객체를 대상`으로 편리하게 사용하도록 지원하는 문법
+- `iterator` 즉, `순서가 있는 데이터형`에서 사용
+
+### 4.3. for of 구문
+
+- for 문으로 모두 가능하다.
+- for 를 `배열, 문자열등을 대상`으로 편리하게 사용하도록 지원하는 문법
+
+### 4.4. while 구문
+
+- `조건이 참`인 동안 무한히 반복함.
+- 반복의 횟수를 모르는 경우
+
+```js
+while(조건){
+  할일;
+  반드시 거짓으로 만들어야 합니다.
+}
+```
+
+```js
+let count = 0;
+while (count < 5) {
+  //거짓을 만들기 위한 조건을 작성함.
+  count = count + 1;
+  console.log(count);
+}
+```
+
+### 4.5. do while 구문
+
+- while 과 다르게 일단 실행하고 조건 검사
+
+```js
+do {
+  할일;
+} while (조건);
+```
+
+```js
+let count = 0;
+do {
+  //거짓을 만들기 위한 조건을 작성함.
+  count = count + 1;
+  console.log(count);
+} while (count < 5);
+```
+
+## 5. 함수(function)
+
+- 기능을 `{}` 묶어서 관리
+- 여러번 재활용한다
+- 문서 즉 설명서가 잘 만들어져야 함
+- 기능 예외처리를 잘 해야 한다
