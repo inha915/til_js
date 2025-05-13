@@ -1259,7 +1259,7 @@ for (let i = 0; i < total; i++) {
 
 - 예) 구구단
 - 가까운 for 문에서 `break` 는 반복문 빠져나오고 종료됨.
-- 가까운 for 문에서 `continue` 는 반복문 실행 건너뛰고 계속 실행.
+- 가까운 for 문에서 `continue` 는 반복문 실행 건너띄고 계속 실행.
 
 ```js
 const total = 9;
@@ -1287,21 +1287,53 @@ for (let i = 1; i <= total; i++) {
 ### 4.2. for in 구문
 
 - for 문으로 모두 가능하다.
-- for를 `객체를 대상`으로 편리하게 사용하도록 지원하는 문법
-- `iterator` 즉, `순서가 있는 데이터형`에서 사용
+- for 를 `객체를 대상`으로 편리하게 사용하도록 지원하는 문법
+
+```js
+// for in 구문 예제 (대상은 객체 속성 반복)
+const singer = {
+  id: "123",
+  name: "아이유",
+  age: 30,
+  city: "서울",
+};
+// 개발자가 직접 알아내는 경우
+// console.log(singer.id);
+// console.log(singer.name);
+// console.log(singer.age);
+
+// 반복문 활용
+for (let key in singer) {
+  console.log(key);
+  console.log(singer[key]);
+}
+```
 
 ### 4.3. for of 구문
 
 - for 문으로 모두 가능하다.
-- for 를 `배열, 문자열등을 대상`으로 편리하게 사용하도록 지원하는 문법
+- for 를 `배열, 문자열 등을 대상`으로 편리하게 사용하도록 지원하는 문법
+- `iterator` 즉, `순서가 있는 데이터형`에서 사용
+
+```js
+const citiesArr = ["대구", "서울", "부산"];
+for (let city of citiesArr) {
+  console.log(city);
+}
+
+const words = "안녕하세요.반가워요.";
+for (let i of words) {
+  console.log(i);
+}
+```
 
 ### 4.4. while 구문
 
 - `조건이 참`인 동안 무한히 반복함.
-- 반복의 횟수를 모르는 경우
+- 반복에 횟수를 모르는 경우
 
 ```js
-while(조건){
+while (조건) {
   할일;
   반드시 거짓으로 만들어야 합니다.
 }
@@ -1309,8 +1341,9 @@ while(조건){
 
 ```js
 let count = 0;
+
 while (count < 5) {
-  //거짓을 만들기 위한 조건을 작성함.
+  // 거짓을 만들기 위한 조건을 작성함.
   count = count + 1;
   console.log(count);
 }
@@ -1328,8 +1361,9 @@ do {
 
 ```js
 let count = 0;
+
 do {
-  //거짓을 만들기 위한 조건을 작성함.
+  // 거짓을 만들기 위한 조건을 작성함.
   count = count + 1;
   console.log(count);
 } while (count < 5);
@@ -1337,7 +1371,916 @@ do {
 
 ## 5. 함수(function)
 
-- 기능을 `{}` 묶어서 관리
-- 여러번 재활용한다
-- 문서 즉 설명서가 잘 만들어져야 함
-- 기능 예외처리를 잘 해야 한다
+- 각 독립된 역할별 기능을 `{}` 묶고 `function 함수명()` 를 주어서 관리
+- 여러번 재활용(`호출, call`)한다. : `함수명()`
+- 문서 즉 설명서(JSDoc)가 잘 만들어져야 함.
+- 기능 예외처리를 잘 해야 한다.
+
+### 5.1. 함수가 왜 필요하지?
+
+- 반복되는 1줄 이상의 코드가 있다면 함수라는 것을 만들 생각해 보자.
+- 코드에 대한 가독성이 필요하면 함수라는 것을 만들 생각해 보자.
+- 한번에 코드를 수정하여 다양한 곳에 동시에 반영되는 것을 원하면 함수라는 것을 만들 생각해 보자.
+- 코드에 안정성을 생각한다면 함수라는 것을 만들 생각해 보자.
+- 협업을 한다면 기능을 만들어서 재활용하여야 하며 이때 함수라는 것을 만들 생각해 보자.
+
+```js
+// 아래는 사용자의 명단과 반가워요라는 메세지를 출력하는 기능이다.
+let user_1 = "홍길동";
+let user_2 = "김길동";
+let user_3 = "박길동";
+let user_4 = "고길동";
+let user_5 = "정길동";
+console.log(user_1 + "님 반가워요.");
+console.log(user_2 + "님 반가워요.");
+console.log(user_3 + "님 반가워요.");
+console.log(user_4 + "님 반가워요.");
+console.log(user_5 + "님 반가워요.");
+```
+
+- 기능을 구분해서 관리하고 싶다. (여기서는 회원명단 및 인사 기능)
+
+```js
+// 아래는 사용자의 명단과 반가워요라는 메세지를 출력하는 기능이다.
+function useMember() {
+  let user_1 = "홍길동";
+  let user_2 = "김길동";
+  let user_3 = "박길동";
+  let user_4 = "고길동";
+  let user_5 = "정길동";
+  console.log(user_1 + "님 반가워요.");
+  console.log(user_2 + "님 반가워요.");
+  console.log(user_3 + "님 반가워요.");
+  console.log(user_4 + "님 반가워요.");
+  console.log(user_5 + "님 반가워요.");
+}
+// 함수 활용, 함수 호출, 함수 call
+useMember();
+useMember();
+useMember();
+useMember();
+useMember();
+```
+
+### 5.2. 함수 만들기
+
+```js
+// 함수 이름은 동사로 짓는다.
+function 함수명() {
+  기능1;
+  기능2;
+  기능3;
+}
+function 함수명(재료1, 재료2, 재료3) {
+  재료1 처리 기능1;
+  재료2 처리 기능2;
+  재료3 처리 기능3;
+}
+```
+
+### 5.3. 계산기 만들기
+
+- 단계 1.
+
+```js
+// 계산기 만들기
+const result_1 = 5 + 4;
+const result_2 = 8 + 3;
+const result_3 = 7 + 2;
+const result_4 = 6 + 1;
+```
+
+- 단계 2.
+
+```js
+// 계산기 만들기
+function result_1() {
+  5 + 4;
+}
+function result_2() {
+  8 + 3;
+}
+function result_3() {
+  7 + 2;
+}
+function result_4() {
+  6 + 1;
+}
+```
+
+- 단계 3. 재료만 다르고 하는 일은 + 기능이다.
+
+```js
+// 계산기 만들기
+function add(재료1, 재료2) {
+  재료1 + 재료2;
+}
+add(5, 4);
+add(8, 3);
+add(7, 2);
+add(6, 1);
+```
+
+- 단계 4. minus 기능 만들기
+
+```js
+function minus(매개변수1, 매개변수2) {
+  매개변수1 - 매개변수2;
+}
+minus(5, 4);
+```
+
+- 단계 5. 기능에 예외처리(오류 처리) 적용하기
+- 오류 : 원하지 않는 결과, Error도 모두 포함해서 오류라 생각합니다.
+
+```js
+function add(매개변수1, 매개변수2) {
+  // 방어코드 (예외처리)
+  if (매개변수1 === undefined) {
+    return alert("매개변수 1 을 입력하세요.");
+  }
+  if (매개변수2 === undefined) {
+    return alert("매개변수 2 을 입력하세요.");
+  }
+  매개변수1 + 매개변수2;
+}
+
+function minus(매개변수1, 매개변수2) {
+  매개변수1 - 매개변수2;
+}
+
+add(5, "100"); // 원하지 않는 결과이므로 오류
+add(5, undefined); // 원하지 않는 결과이므로 오류
+add(5); // 원하지 않는 결과이므로 오류
+```
+
+### 5.4. JSDoc 으로 함수 사용에 대해서 안내(설명서) 하기
+
+- jsDoc 기본 이해
+- 재료, 매개변수를 parameter 라고 합니다.
+
+```js
+/**
+ * 두개의 변수를 받아서 덧셈하는 기능
+ *  @param {number} numA - 첫번째 숫자
+ *  @param {number} numB - 두번째 숫자
+ *  @returns {number} 두 숫자의 덧셈결과
+ */
+function add(numA, numB) {
+  if (numA === undefined) {
+    return alert("첫번째 매개변수 입력해주세요.");
+  }
+  if (numB === undefined) {
+    return alert("두번째 매개변수 입력해주세요.");
+  }
+  return numA + numB;
+}
+```
+
+### 5.5. JSDoc 을 이용한 계산기 함수 만들어보기
+
+````js
+/**
+ * 숫자 더하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} 덧셈 결과
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * 숫자 빼기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} - 뺄셈 결과
+ */
+function minus(a, b) {
+  return a - b;
+}
+
+/**
+ * 숫자 곱하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} - 곱셈 결과
+ */
+function multi(a, b) {
+  return a * b;
+}
+/**
+ * 숫자 나누기 기능
+ * @param {number} a - number
+ * @param {number} b - number
+ * @returns {number} - 나눗셈 결과
+ *
+ * ------ 호출예 -----
+ * ```javascript
+ * let result = divide(5, 4)
+ * ```
+ *
+ */
+function divide(a, b) {
+  if (b === 0) {
+    return alert("분모는 0 이 아니어야 합니다.");
+  }
+  // 데이터 알아내고, 타입 비교하기
+  if (typeof a !== "number") {
+    return alert("분자는 숫자여야 합니다.");
+  }
+  if (typeof b !== "number") {
+    return alert("분모는 숫자여야 합니다.");
+  }
+
+  return a / b;
+}
+
+// 덧셈 사용
+const resultAdd = add(5, 4);
+const resultMinus = minus(5, 4);
+const resultMulti = multi(5, 4);
+const resultDivide = divide(5, 0);
+````
+
+- 추가 함수
+
+````js
+/**
+ * 숫자 더하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} 덧셈 결과
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * 숫자 빼기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} - 뺄셈 결과
+ */
+function minus(a, b) {
+  return a - b;
+}
+
+/**
+ * 숫자 곱하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @returns {number} - 곱셈 결과
+ */
+function multi(a, b) {
+  return a * b;
+}
+/**
+ * 숫자 나누기 기능
+ * @param {number} a - number
+ * @param {number} b - number
+ * @returns {number} - 나눗셈 결과
+ *
+ * ------ 호출예 -----
+ * ```javascript
+ * let result = divide(5, 4)
+ * ```
+ *
+ */
+function divide(a, b) {
+  if (b === 0) {
+    return alert("분모는 0 이 아니어야 합니다.");
+  }
+  // 데이터 알아내고, 타입 비교하기
+  if (typeof a !== "number") {
+    return alert("분자는 숫자여야 합니다.");
+  }
+  if (typeof b !== "number") {
+    return alert("분모는 숫자여야 합니다.");
+  }
+
+  return a / b;
+}
+
+/**
+ * 계산기 기능
+ * 계산기 기능은 +, -, *, / 기능이 있습니다.
+ * @param {string} symbol  +, -, *, / 기호 중 1개 입력
+ * @param {number} a 숫자 입력
+ * @param {number} b 숫자 입력
+ * @returns {number} 결과는 숫자
+ *
+ * 사용 예) =================
+ *
+ * ```javascript
+ * const result = calcurator("+", 5, 4);
+ * ```
+ */
+function calcurator(symbol, a, b) {
+  if (typeof symbol !== "string") {
+    return alert("기호를 입력하세요.");
+  }
+  let result = 0;
+
+  switch (symbol) {
+    case "+":
+      result = add(a, b);
+      break;
+    case "-":
+      result = minus(a, b);
+      break;
+    case "/":
+      result = divide(a, b);
+      break;
+    case "*":
+      result = multi(a, b);
+      break;
+    default:
+      return alert("올바른 기호를 입력해 주세요.");
+  }
+
+  return result;
+}
+````
+
+### 5.6. 다양한 함수 예제
+
+```js
+/**
+ * 메시지를 콘솔에 출력하기
+ * @param {string} message - 출력할 메시지
+ */
+function showMessage(message) {
+  console.log(message);
+}
+showMessage("안녕");
+showMessage("홍길동 반가워");
+```
+
+```js
+/**
+ * 배열을 받아서 요소를 출력하는 함수
+ * @param { number[] } arr - 숫자모음 배열
+ */
+function showArr(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+}
+```
+
+```js
+/**
+ * 객체의 속성 값을 출력하는 기능
+ * @param { {id:number, nickName:string, age:number } } user - 사용자 객체
+ */
+function showUser(user) {
+  console.log(user.id);
+  console.log(user.nickName);
+  console.log(user.age);
+}
+```
+
+### 5.7. 함수의 기본 값 설정하기
+
+````js
+/**
+ * 나이를 10살 더하여서 출력함.
+ * @param {number} age - 현재 나이 입력
+ * ```javascript
+ * const result = showAge(10); // 20
+ * ```
+ */
+function showAge(age = 0) {
+  return age + 10;
+}
+````
+
+### 5.8. 매개변수의 총 개수 자동으로 알아내기
+
+```js
+/**
+ * 입력된 매개 변수 만큼 총합계산하기
+ * @param {number} numbers - 숫자 값
+ */
+function showTotal() {
+  console.log(arguments);
+  let total = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    total = total + arguments[i];
+  }
+  return total;
+}
+
+const result = showTotal(4, 5, 6, 7, 8, 9, 1, 2, 0);
+```
+
+- Rest 파라메터는 전될된 매개변수에 `정확한 값만 배열`로 만든다.
+
+```js
+/**
+ * 입력된 매개 변수 만큼 총합계산하기
+ * Rest 파라메터 이용하기
+ * @param {...number} numbers - 숫자 값
+ */
+function showTotal(...rest) {
+  console.log(rest);
+  let total = 0;
+  for (let i = 0; i < rest.length; i++) {
+    total = total + rest[i];
+  }
+  return total;
+}
+
+const result = showTotal(4, 5, 6, 7, 8, 9, 1, 2, 0);
+```
+
+- Rest 파라메터는 기본 매개변수 적용 후, `나머지를 배열로 추출`한다.
+
+```js
+/**
+ * 입력된 매개 변수 만큼 총합계산하기
+ * Rest 파라메터 이용하기
+ * @param {...number} numbers - 숫자 값
+ */
+function showTotal(a, b, ...rest) {
+  console.log(a);
+  console.log(b);
+  console.log(rest);
+  let total = 0;
+  for (let i = 0; i < rest.length; i++) {
+    total = total + rest[i];
+  }
+  return total;
+}
+
+const result = showTotal(4, 5, 6, 7, 8, 9, 1, 2, 0);
+```
+
+## 6. 함수 선언법을 꼭 이해하자.
+
+- 1. 일반적 함수 만드는 법
+
+```js
+function 함수명(매개변수) {
+  return 결과값;
+}
+함수명(매개변수);
+```
+
+- 2. `변수의 값`으로 함수 만드는 법
+
+```js
+const 변수명 = function (매개변수) {
+  return 결과값;
+};
+변수명(매개변수);
+```
+
+- 3. 왜 `const 변수명 = function 형태`가 필요하지?
+
+```js
+function add() {
+  return 1 + 2;
+}
+// add();
+
+const addFun = function () {
+  return 1 + 2;
+};
+// addFun();
+
+const minusFun = function () {
+  return 1 - 2;
+};
+// minusFun();
+
+function test(_func) {
+  _func();
+}
+
+test(add); // 값이 아니라서 안된다.
+test(addFun);
+test(minusFun);
+```
+
+- 아래 코드는 특히 위치를 살펴보자. : 완성하고 사용하자.
+
+```js
+add(); // 호이스팅이 되므로 괜찮다.
+addFN(); // 호이스팅 에러 발생한다. (주의하자)
+function add() {}
+const addFN = function () {};
+```
+
+## 7. 함수 추가 정리
+
+### 7.1. 함수를 만들 시점 (언제 함수를 만들까에 대한 안내)
+
+#### 7.1.1. 코드가 너무 긴 경우(`하나의 결과를 만들기 위해서 작성시`)
+
+- 코드 가독성이 너무 떨어져서 추후 분석이 곤란할때
+- 하나의 결과를 만들기 위한 과정을 작성중 너무 많은 코드가 작성될때
+- 여러 줄이 작성되어서 한개의 결과를 만든다면 함수로 묶어서 만들까? 고민하자.
+
+#### 7.1.2. 동일한 기능이 여러 번 사용될때
+
+- 2번이상 동일한 기능이라면 함수를 만들까? 고민
+- 2번이상 동일한 기능인데 재료(매개변수)만 다르다? 함수만들까? 고민
+
+#### 7.1.3. 코드를 누군가에게 주어야 할때
+
+- 코드를 공유할 때 함수만들까? 고민
+
+### 7.2. 함수 만드는 법
+
+- `{}` 로 코드 블럭을 이용해서 묶어준다.
+- 이름을 짓는데, `동사`로 지어준다. (기본 : Camel, 생성자함수: Pascal )
+- 이름 뒤에 `()` 를 작성한다.
+- 이름 뒤에 `(재료, 재료)` 를 작성한다.
+- 이름 뒤에 `(매개변수, 매개변수)` 를 작성한다.
+- 이름 뒤에 `(parameter, paramter)` 를 작성한다.
+- function 키워드를 작성해 준다.
+- `JSDoc` 으로 사용설명서를 작성해 주면 좋겠다.
+
+### 7.3. 함수 사용법(`호출, Call` 등으로 명칭함)
+
+- 함수명();
+- 함수명을 호출했다.
+- 함수명 Call 했다.
+
+### 7.4. 함수 샘플
+
+- 넓이를 계산하는 기능, 그런데 2번이상 사용, 누군가에게 공유
+
+````js
+/**
+ * 너비를 계산해 주는 함수
+ * @param {number} _width
+ * @param {number} _height
+ * @returns {number}
+ * -- 함수사용 예 --
+ * ```js
+ *  const result = calcRect(5, 4);
+ * ```
+ */
+function calcRect(_width = 0, _height = 0) {
+  // 추후에 무수하게 예외처리 코드가 작성이 된다.
+  // 업데이트 진행
+  return _width * _height;
+}
+// 함수 호출
+const result = calcRect(5, 4);
+console.log(result);
+````
+
+### 7.5. 함수에 추가 지식
+
+- 매개변수에 기본값을 지정할 수 있다.
+
+```js
+function 함수명(매개변수 = 기본값) {}
+```
+
+- 매개변수 개수에는 제한이 없다.
+
+```js
+function 함수명(매개변수1, 매개변수2) {
+  const params = arguments; // 배열로 접근 가능
+}
+함수명(1, 2, 3, 4, 5);
+```
+
+- arguments 말고 `rest 파라메터`를 쓰자.
+
+```js
+function 함수명(매개변수1, 매개변수2, ...res) {
+  const params = res; // 배열로 접근 가능
+}
+함수명(1, 2, 3, 4, 5);
+```
+
+- 함수를 `표현식(Expression)`으로 만드는법
+- 변수에 함수를 담는 이유는 `함수에 매개변수`에 전달하려고
+
+```js
+// 함수 표현식 정의
+const 함수명 = function () {};
+
+const add = function () {};
+function calcFunc(_fn) {
+  add();
+}
+calcFunc(add);
+```
+
+- 콜백함수는 `특정한 이벤트`가 발생시 덩달아서 실행(추후 다시 보자)
+
+## 8. 화살표 함수(Arrow Function)
+
+- FE 에서 함수 작성시 많이 볼수 있는 형태
+- 활용 비율이 높다. 반드시 이해해 보자.
+
+### 8.1. 화살표 함수가 필요한 이유
+
+- 함수가 간략해 집니다.
+- 함수가 최적화 됩니다. (메모리 절약, 성능 최적화)
+- this 의 범위가 고정됩니다. (추후 진행)
+- new 를 사용못합니다. (추후 진행)
+
+### 8.2. 화살표 함수 작성법 (반드시 이해하세요.)
+
+- 매개변수가 없는 경우
+
+```js
+// 기본 함수
+function say() {
+  console.log("안녕");
+}
+// 표현식 함수
+const say = function () {
+  console.log("안녕");
+};
+// 화살표함수
+const sayArrow = () => {
+  console.log("안녕");
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = () => console.log("안녕");
+```
+
+- `매개변수`가 오로지 `1개 있을 때`
+
+```js
+// 기본 함수
+function say(_word) {
+  console.log(_word);
+}
+// 표현식 함수
+const say = function (_word) {
+  console.log(_word);
+};
+// 화살표함수
+const sayArrow = (_word) => {
+  console.log(_word);
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = (_word) => console.log(_word);
+
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+// 매개변수 () 가 생략이 가능하다.
+const sayArrow3 = (_word) => console.log(_word);
+```
+
+- 매개변수가 2개 이상일 때
+
+```js
+// 기본 함수
+function say(_word, _name) {
+  console.log(_word + _name);
+}
+// 표현식 함수
+const say = function (_word, _name) {
+  console.log(_word + _name);
+};
+// 화살표함수
+const sayArrow = (_word, _name) => {
+  console.log(_word + _name);
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = (_word, _name) => console.log(_word + _name);
+
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+// 매개변수 2개 이상은 () 가 필수
+const sayArrow3 = (_word, _name) => console.log(_word + _name);
+```
+
+## 9. 스코프(Scope)의 이해
+
+- 변수의 활용 가능한 범위
+- 제일 중요한 것은 `{}` 입니다.
+
+### 9.1. Scope 의 종류 2가지
+
+- 전역 범위 : Global Scope
+- 지역 범위 : Local Scope
+
+### 9.2. 전역 범위
+
+- 프로그램 어디서든 마음대로 접근해서 활용
+
+```js
+// 전역 변수
+const appName = "JavaScript World";
+
+{
+  console.log(appName);
+}
+
+function say() {
+  console.log(appName);
+}
+say();
+```
+
+```js
+// 전역 자리
+function say() {
+  console.log("안녕");
+}
+
+// 지역 자리
+{
+  say();
+}
+
+say();
+```
+
+### 9.3. 지역 범위
+
+- `{}` 블록 안쪽을 `지역범위`라고 합니다.
+
+```js
+{
+  // 지역 변수
+  const appName = "JavaScript World";
+  console.log(appName);
+}
+
+function say() {
+  console.log(appName);
+}
+say();
+```
+
+- 아래는 정상적으로 실행된다.
+- `function 키워드`는 전역 범위에 등록이 된다.
+- 개발자의 선택권한 없다.
+
+```js
+// 전역 자리
+
+// 지역 자리
+{
+  function say(_name) {
+    console.log(_name + " 안녕");
+  }
+  say("홍길동");
+}
+
+say("박길동");
+```
+
+- function 은 전역에 등록되므로 예측 곤란
+- 아래 코드는 협업 실패 : `function ` 은 전역에 등록해서 쓰자
+- `function ` 은 지역에 코드하지 말자.
+
+```js
+// 전역 자리
+
+// 개발자: 홍길동 지역 자리
+{
+  function say(_name) {
+    console.log(_name + " Hello");
+  }
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  function say(_name) {
+    console.log(_name + " 반가워");
+  }
+  say("고길동");
+}
+
+say("테스터");
+```
+
+- 아래를 추천함.
+
+```js
+// 전역 자리
+function say(_word) {
+  console.log("기본 실행 함수 : " + _word);
+}
+// 개발자: 홍길동 지역 자리
+{
+  const say = function (_name) {
+    console.log(_name + " Hello");
+  };
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  const say = function (_name) {
+    console.log(_name + " 반가워");
+  };
+  say("고길동");
+}
+
+say("테스터");
+```
+
+- 화살표로 고치면
+
+```js
+// 전역 자리
+function say(_word) {
+  console.log("기본 실행 함수 : " + _word);
+}
+// 개발자: 홍길동 지역 자리
+{
+  const say = (_name) => console.log(_name + " Hello");
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  const say = (_name) => console.log(_name + " 반가워");
+  say("고길동");
+}
+
+say("테스터");
+```
+
+## 10. `this` 라는 키워드가 우리를 괴롭힐 겁니다.
+
+- this 가 스코프와 연결되면서 혼란스럽다.
+
+### 10.1. 전역 스코프의 this 는 `Window` 이다.
+
+```js
+console.log(this); // Window{....
+```
+
+### 10.2. function 의 this 는 `Window` 이다.
+
+```js
+function say() {
+  console.log(this); // Window{....
+  function hi() {
+    console.log(this); // Window{....
+  }
+  hi();
+}
+say();
+```
+
+```js
+const say = function () {
+  console.log(this);
+};
+say();
+```
+
+### 10.3. function 또는 표현식 함수는 this 사용시 위험한 코드이다.
+
+- this 는 동일한 스코프를 가르쳐서 값이 변할 위험 존재
+- this 는 물어보지도 않고 `var 변수`를 만들고 window 변수에 등록
+
+```js
+var brand = "nike";
+
+function now() {
+  this.brand = "adidas";
+}
+
+console.log("함수 실행전 : ", brand);
+
+now();
+console.log("함수 실행후 : ", brand);
+```
+
+### 10.4. 객체에 속성으로 만든 함수에서의 this
+
+- 객체에서 this 는 객체 전체를 가르킨다.
+- 어? function 사용하니까 `this 가 상황에 따라서 변하는데?`
+
+```js
+const Person = {
+  name: "아이유",
+  age: 20,
+  sayHi: function () {
+    console.log(this);
+  },
+};
+
+Person.sayHi();
+```
+
+### 10.5. 객체 생성자 함수로 사용시 this
+
+- 생성된 객체가 this 가 된다.
+
+```js
+// 대문자 즉 Pascal
+function Coffee() {
+  console.log(this);
+}
+
+Coffee();
+new Coffee();
+```
