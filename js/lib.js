@@ -1,10 +1,12 @@
-const Person = {
-  name: "아이유",
-  age: 20,
-  sayHi: function () {
-    console.log(this);
-  },
-};
-Person.name;
-Person.age;
-Person.sayHi();
+const say = function () {};
+const cry = () => {};
+
+// 매개변수로 전달된 함수 실행
+function run(a) {
+  a();
+}
+
+run(say);
+run(cry);
+
+run(function () {});
